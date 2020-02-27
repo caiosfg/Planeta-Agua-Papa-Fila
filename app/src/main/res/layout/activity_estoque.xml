@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/planetaagua"
+    android:padding="15dp"
+    tools:context=".Estoque">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione o fornecedor :"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cascatai"
+        android:id="@+id/check_cascatai"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SuperLeve"
+        android:id="@+id/check_superleve"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ouro da Serra"
+        android:id="@+id/check_ourodaserra"/>
+    <Button
+        android:id="@+id/btnenviaestoque"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorLight"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:text="CONFERE" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/txtresult"/>
+
+</LinearLayout>

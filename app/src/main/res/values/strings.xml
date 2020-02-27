@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Planeta Agua</string>
-    <string name="senha">senha</string>
+    <string name="senha">Senha</string>
     <string name="digite_o_numero_para_impressao">Digite o numero desejado</string>
     <string name="imprimir_senha">printSenha</string>
     <string name="print_Images">Print Images</string>
-    <string name="venda">venda</string>
-    <string name="estoque">estoque</string>
+    <string name="venda">Venda</string>
+    <string name="estoque">Estoque</string>
     <string name="informe_valor">Informe um valor!</string>
     <string name="piar_unpair">Unpair</string>
 </resources>

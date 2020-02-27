@@ -35,55 +35,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ViewHolder mViewHolder = new ViewHolder();
     Printing printing;
-    Button btn_print, btn_print_image,btn_unpair_pair;
+    Button btn_print, btn_print_image, btn_unpair_pair;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         initView();
 
-        this.mViewHolder.txtSenha=findViewById(R.id.senha);
-        this.mViewHolder.editFila=findViewById(R.id.codFila);
-        this.mViewHolder.btnImpSenha=findViewById(R.id.impsenha);
-        this.mViewHolder.txtVenda=findViewById(R.id.venda);
-        this.mViewHolder.txtEstoque=findViewById(R.id.estoque);
+        this.mViewHolder.txtSenha = findViewById(R.id.senha);
+        this.mViewHolder.editFila = findViewById(R.id.codFila);
+        this.mViewHolder.btnImpSenha = findViewById(R.id.impsenha);
+        this.mViewHolder.txtVenda = findViewById(R.id.venda);
+        this.mViewHolder.txtEstoque = findViewById(R.id.estoque);
 
         this.mViewHolder.btnImpSenha.setOnClickListener(this);
 
     }
 
     private void initView() {
-        btn_print =(Button)findViewById(R.id.impsenha);
-        btn_print_image =(Button)findViewById(R.id.btnPrintImages);
-        btn_unpair_pair =(Button)findViewById(R.id.btnPiarUnpair);
+        btn_print = (Button) findViewById(R.id.impsenha);
+        btn_print_image = (Button) findViewById(R.id.btnPrintImages);
+        btn_unpair_pair = (Button) findViewById(R.id.btnPiarUnpair);
 
-        if(printing != null) {
-        printing.setPrintingCallback(this);
+        if (printing != null) {
+            printing.setPrintingCallback(this);
         }
 
         btn_unpair_pair.setOnClickListener(view -> {
-            if(Printooth.INSTANCE.hasPairedPrinter())
+            if (Printooth.INSTANCE.hasPairedPrinter())
                 Printooth.INSTANCE.removeCurrentPrinter();
-            else{
-                startActivityForResult(new Intent(MainActivity.this, ScanningActivity.class),ScanningActivity.SCANNING_FOR_PRINTER);
+            else {
+                startActivityForResult(new Intent(MainActivity.this, ScanningActivity.class), ScanningActivity.SCANNING_FOR_PRINTER);
                 changePairAndUnpair();
             }
         });
 
 
         btn_print_image.setOnClickListener(v -> {
-            if(!Printooth.INSTANCE.hasPairedPrinter())
-                startActivityForResult(new Intent(MainActivity.this,ScanningActivity.class),ScanningActivity.SCANNING_FOR_PRINTER);
+            if (!Printooth.INSTANCE.hasPairedPrinter())
+                startActivityForResult(new Intent(MainActivity.this, ScanningActivity.class), ScanningActivity.SCANNING_FOR_PRINTER);
             else
                 printImages();
         });
 
         btn_print.setOnClickListener(v -> {
-            if(!Printooth.INSTANCE.hasPairedPrinter())
-                startActivityForResult(new Intent(MainActivity.this,ScanningActivity.class),ScanningActivity.SCANNING_FOR_PRINTER);
+            if (!Printooth.INSTANCE.hasPairedPrinter())
+                startActivityForResult(new Intent(MainActivity.this, ScanningActivity.class), ScanningActivity.SCANNING_FOR_PRINTER);
             else
                 printText();
         });
@@ -95,23 +95,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void printText() {
         ArrayList<Printable> printables = new ArrayList<>();
-        printables.add(new RawPrintable.Builder(new byte[]{27,100,4}).build());
+        printables.add(new RawPrintable.Builder(new byte[]{27, 100, 4}).build());
 
         printables.add(new TextPrintable.Builder()
-        .setText("Planeta Agua ! Sua Senha e =")
-        .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
-        .setNewLinesAfter(1)
-        .build());
+                .setText("Planeta Agua ! Sua Senha e =")
+                .setCharacterCode(DefaultPrinter.Companion.getCHARCODE_PC1252())
+                .setNewLinesAfter(1)
+                .build());
 
         //Alterar Texto
         printables.add(new TextPrintable.Builder()
-        .setText("Planeta Agua ! Senha = ")
-        .setLineSpacing(DefaultPrinter.Companion.getLINE_SPACING_60())
-        .setAlignment(DefaultPrinter.Companion.getALIGNMENT_CENTER())
-        .setEmphasizedMode(DefaultPrinter.Companion.getEMPHASIZED_MODE_BOLD())
-        .setUnderlined(DefaultPrinter.Companion.getUNDERLINED_MODE_ON())
-        .setNewLinesAfter(1)
-        .build());
+                .setText("Planeta Agua ! Senha = ")
+                .setLineSpacing(DefaultPrinter.Companion.getLINE_SPACING_60())
+                .setAlignment(DefaultPrinter.Companion.getALIGNMENT_CENTER())
+                .setEmphasizedMode(DefaultPrinter.Companion.getEMPHASIZED_MODE_BOLD())
+                .setUnderlined(DefaultPrinter.Companion.getUNDERLINED_MODE_ON())
+                .setNewLinesAfter(1)
+                .build());
 
         printing.print(printables);
     }
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void changePairAndUnpair() {
-        if(Printooth.INSTANCE.hasPairedPrinter())
+        if (Printooth.INSTANCE.hasPairedPrinter())
             btn_unpair_pair.setText(new StringBuilder("Unpair").append(Printooth.INSTANCE.getPairedPrinter().getName().toString()));
         else
             btn_unpair_pair.setText("Pair with Printer");
@@ -152,14 +152,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        if(v.getId() == R.id.impsenha){
+        if (v.getId() == R.id.impsenha) {
             String value = this.mViewHolder.editFila.getText().toString();
 
 
-            if("".equals(value)) {
+            if ("".equals(value)) {
                 Toast.makeText(this, this.getString(R.string.informe_valor), Toast.LENGTH_LONG).show();
-            }
-            else{
+            } else {
 
             }
         }
@@ -168,49 +167,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void connectingWithPrinter() {
-       Toast.makeText(this,"Conectando a Impressora",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Conectando a Impressora", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void connectionFailed(String s) {
-        Toast.makeText(this,"Falha:"+s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Falha:" + s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onError(String s) {
-        Toast.makeText(this,"Erro Inesperado:"+s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Erro Inesperado:" + s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onMessage(String s) {
-        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void printingOrderSentSuccessfully() {
-        Toast.makeText(this,"Solicitacao enviada a impressora",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Solicitacao enviada a impressora", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode ==ScanningActivity.SCANNING_FOR_PRINTER &&
-        resultCode == Activity.RESULT_OK)
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ScanningActivity.SCANNING_FOR_PRINTER &&
+                resultCode == Activity.RESULT_OK)
             initPrinting();
         changePairAndUnpair();
     }
 
     private void initPrinting() {
-        if(!Printooth.INSTANCE.hasPairedPrinter()){
+        if (!Printooth.INSTANCE.hasPairedPrinter()) {
             printing = Printooth.INSTANCE.printer();
-        if(printing != null){
-            printing.setPrintingCallback(this);
-        }
+            if (printing != null) {
+                printing.setPrintingCallback(this);
+            }
         }
     }
 
 
-    private static class ViewHolder{
+    private static class ViewHolder {
 
         TextView txtSenha;
         EditText editFila;
