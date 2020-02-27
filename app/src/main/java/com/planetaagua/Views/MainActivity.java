@@ -1,9 +1,8 @@
-package com.planetaagua;
+package com.planetaagua.Views;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,12 +10,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.mazenrashed.printooth.Printooth;
 import com.mazenrashed.printooth.data.printable.ImagePrintable;
 import com.mazenrashed.printooth.data.printable.Printable;
@@ -26,16 +23,21 @@ import com.mazenrashed.printooth.data.printer.DefaultPrinter;
 import com.mazenrashed.printooth.ui.ScanningActivity;
 import com.mazenrashed.printooth.utilities.Printing;
 import com.mazenrashed.printooth.utilities.PrintingCallback;
+import com.planetaagua.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, PrintingCallback {
 
     private ViewHolder mViewHolder = new ViewHolder();
+    private static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("DD/MM/YYYY");
     Printing printing;
     Button btn_print, btn_print_image, btn_unpair_pair;
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -50,8 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.mViewHolder.btnImpSenha = findViewById(R.id.impsenha);
         this.mViewHolder.txtVenda = findViewById(R.id.venda);
         this.mViewHolder.txtEstoque = findViewById(R.id.estoque);
-
+        this.mViewHolder.txtDate = findViewById(R.id.txtDay);
+        this.mViewHolder.getbtnestoque = findViewById(R.id.btnestoque);
         this.mViewHolder.btnImpSenha.setOnClickListener(this);
+        //Data Corrente
+        this.mViewHolder.txtDate.setText(SIMPLE_DATE_FORMAT.format(Calendar.getInstance().getTime()));
 
     }
 
@@ -154,13 +159,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v.getId() == R.id.impsenha) {
             String value = this.mViewHolder.editFila.getText().toString();
-
-
+            
             if ("".equals(value)) {
                 Toast.makeText(this, this.getString(R.string.informe_valor), Toast.LENGTH_LONG).show();
             } else {
 
             }
+        }
+        if(v.getId() == R.id.btnestoque){
+            Intent intent = new Intent(this, Estoque.class);
+            startActivity(intent);
         }
 
     }
@@ -210,12 +218,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private static class ViewHolder {
-
         TextView txtSenha;
         EditText editFila;
-        Button btnImpSenha;
+        Button btnImpSenha,getbtnestoque;
         TextView txtVenda;
         TextView txtEstoque;
+        TextView txtDate;
 
     }
 }

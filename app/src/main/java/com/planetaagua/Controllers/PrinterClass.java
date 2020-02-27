@@ -1,4 +1,4 @@
-package com.planetaagua;
+package com.planetaagua.Controllers;
 
 import android.app.Application;
 import android.widget.Button;
