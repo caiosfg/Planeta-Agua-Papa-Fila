@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/senha"
+        android:text="@string/senha"
+        android:background="#c7efcf"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/codFila"
+        android:text="@string/digite_o_numero_para_impressao"/>
+    <Button
+        android:id="@+id/impsenha"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/imprimir_senha" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/venda"
+        android:text="@string/venda"
+        android:background="#c7efcf"
+        />
+    <Button
+        android:id="@+id/btnPrintImages"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/print_Images" />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/estoque"
+        android:text="@string/estoque"
+        android:background="#c7efcf"
+        />
+    <Button
+        android:id="@+id/btnPiarUnpair"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/piar_unpair" />
+
+</LinearLayout>
