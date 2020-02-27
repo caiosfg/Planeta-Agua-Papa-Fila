@@ -26,7 +26,6 @@ import com.mazenrashed.printooth.utilities.PrintingCallback;
 import com.planetaagua.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewHolder mViewHolder = new ViewHolder();
     private static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("DD/MM/YYYY");
     Printing printing;
-    Button btn_print, btn_print_image, btn_unpair_pair;
+    Button btn_print, btn_print_image, btn_unpair_pair,getbtnestoque,btnImpSenha;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -47,16 +46,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
 
+        getbtnestoque = (Button) findViewById(R.id.btnestoque);
+        btnImpSenha = (Button)findViewById(R.id.impsenha);
+        btn_print_image = (Button)findViewById(R.id.btnPrintImages);
+
         this.mViewHolder.txtSenha = findViewById(R.id.senha);
         this.mViewHolder.editFila = findViewById(R.id.codFila);
-        this.mViewHolder.btnImpSenha = findViewById(R.id.impsenha);
         this.mViewHolder.txtVenda = findViewById(R.id.venda);
         this.mViewHolder.txtEstoque = findViewById(R.id.estoque);
         this.mViewHolder.txtDate = findViewById(R.id.txtDay);
-        this.mViewHolder.getbtnestoque = findViewById(R.id.btnestoque);
-        this.mViewHolder.btnImpSenha.setOnClickListener(this);
+
         //Data Corrente
         this.mViewHolder.txtDate.setText(SIMPLE_DATE_FORMAT.format(Calendar.getInstance().getTime()));
+
+        getbtnestoque.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEstoque();
+            }
+        });
+
+
+        btnImpSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                printText();
+            }
+        });
+
+        btn_print_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                printImages();
+            }
+        });
+
+
 
     }
 
@@ -126,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Load Imagem vindo da Internet
         Picasso.get()
-                .load("https://scontent-gig2-1.xx.fbcdn.net/v/t1.0-9/27459992_151078052218013_7546979691372147626_n.jpg?_nc_cat=110&_nc_ohc=UMLgCznfNvsAX_8wYoa&_nc_ht=scontent-gig2-1.xx&oh=fa57e0bbd29b3d4b061672a7d0393a90&oe=5EBDC901")
+                .load("https://lh4.googleusercontent.com/proxy/8icAGJktw3lSkoEqn-e3r5qqR0lLEoVe-WwnHNXgXu9SSRu4r68r-7NbulUKCkvl9fzWlksZt9UoUC2JNYin9AXfuP_mzJaPJ_r7jDn3K8-EG1iEpq1CogOCGhiDzUcvGw")
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -159,16 +184,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v.getId() == R.id.impsenha) {
             String value = this.mViewHolder.editFila.getText().toString();
-            
+
             if ("".equals(value)) {
                 Toast.makeText(this, this.getString(R.string.informe_valor), Toast.LENGTH_LONG).show();
             } else {
 
             }
-        }
-        if(v.getId() == R.id.btnestoque){
-            Intent intent = new Intent(this, Estoque.class);
-            startActivity(intent);
         }
 
     }
@@ -220,10 +241,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static class ViewHolder {
         TextView txtSenha;
         EditText editFila;
-        Button btnImpSenha,getbtnestoque;
         TextView txtVenda;
         TextView txtEstoque;
         TextView txtDate;
 
+    }
+
+    public void openEstoque(){
+        Intent intent = new Intent(this,Estoque.class);
+        startActivity(intent);
     }
 }
